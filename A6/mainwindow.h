@@ -16,6 +16,12 @@ public:
     MainWindow(model& model, QWidget *parent = nullptr);
     ~MainWindow();
 
+public slots:
+    void onRedButtonPressed();
+    void onRedButtonReleased();
+    void onBlueButtonPressed();
+    void onBlueButtonReleased();
+
 private:
     Ui::MainWindow *ui;
 };
