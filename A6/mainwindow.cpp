@@ -47,12 +47,6 @@ MainWindow::MainWindow(model& model, QWidget *parent)
             this,
             &MainWindow::onStartGame);
 
-    // pattern length set
-    connect(ui->patternLength,
-            &QSpinBox::valueChanged,
-            &model,
-            &model::patternLengthChanged);
-
     // cpu animations
     connect(&model,
             &model::pressRedButton,
@@ -95,11 +89,13 @@ MainWindow::MainWindow(model& model, QWidget *parent)
 }
 
 void MainWindow::onRedButtonPressed() {
-    ui->redButton->move(250, 275);
+    ui->redButton->move(ui->redButton->pos().x(),
+                        ui->redButton->pos().y() + 15);
 }
 
 void MainWindow::onRedButtonReleased() {
-    ui->redButton->move(250, 260);
+    ui->redButton->move(ui->redButton->pos().x(),
+                        ui->redButton->pos().y() - 15);
 }
 
 void MainWindow::pressRedButton() {
@@ -108,11 +104,13 @@ void MainWindow::pressRedButton() {
 }
 
 void MainWindow::onBlueButtonPressed() {
-    ui->blueButton->move(450, 275);
+    ui->blueButton->move(ui->blueButton->pos().x(),
+                        ui->blueButton->pos().y() + 15);
 }
 
 void MainWindow::onBlueButtonReleased() {
-    ui->blueButton->move(450, 260);
+    ui->blueButton->move(ui->blueButton->pos().x(),
+                         ui->blueButton->pos().y() - 15);
 }
 
 void MainWindow::pressBlueButton() {
@@ -131,9 +129,6 @@ void MainWindow::onStartGameReleased() {
 void MainWindow::onStartGame() {
     ui->startGameButton->setVisible(false);
     ui->startGameButtonShadow->setVisible(false);
-    ui->patternLength->setVisible(false);
-    ui->patternLengthLabel->setVisible(false);
-    ui->patternLengthLabelShadow->setVisible(false);
 
     ui->howToPlay->setVisible(false);
     ui->howToPlayShadow->setVisible(false);

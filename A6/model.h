@@ -16,10 +16,8 @@ public:
 
 public slots:
     void startGame();
-    void patternLengthChanged(int patternLength);
 
 signals:
-    void updateScore(QString);
     void updateGameStarted();
     void pressRedButton();
     void pressBlueButton();
@@ -27,9 +25,9 @@ signals:
     void setUserTurn();
     void userWonGame();
     void userLostGame();
+    void invertButtons();
 
 private:
-    bool gameStarted;
     int patternLength;
     int cpuIndex;
     int userIndex;

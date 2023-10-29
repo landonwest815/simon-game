@@ -15,7 +15,6 @@
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
 
@@ -42,9 +41,6 @@ public:
     QLabel *howToPlayTitleShadow;
     QLabel *howToPlay;
     QLabel *howToPlayShadow;
-    QSpinBox *patternLength;
-    QLabel *patternLengthLabel;
-    QLabel *patternLengthLabelShadow;
     QLabel *startGameButtonShadow;
     QLabel *endGameState;
     QMenuBar *menubar;
@@ -191,24 +187,6 @@ public:
 "font: bold 10px;"));
         howToPlayShadow->setAlignment(Qt::AlignCenter);
         howToPlayShadow->setWordWrap(true);
-        patternLength = new QSpinBox(centralwidget);
-        patternLength->setObjectName("patternLength");
-        patternLength->setGeometry(QRect(450, 477, 42, 22));
-        patternLength->setFrame(false);
-        patternLength->setAlignment(Qt::AlignCenter);
-        patternLength->setButtonSymbols(QAbstractSpinBox::NoButtons);
-        patternLength->setMinimum(3);
-        patternLength->setMaximum(15);
-        patternLengthLabel = new QLabel(centralwidget);
-        patternLengthLabel->setObjectName("patternLengthLabel");
-        patternLengthLabel->setGeometry(QRect(300, 480, 141, 16));
-        patternLengthLabel->setStyleSheet(QString::fromUtf8("color: white;\n"
-"font: bold 15px;"));
-        patternLengthLabelShadow = new QLabel(centralwidget);
-        patternLengthLabelShadow->setObjectName("patternLengthLabelShadow");
-        patternLengthLabelShadow->setGeometry(QRect(300, 483, 141, 16));
-        patternLengthLabelShadow->setStyleSheet(QString::fromUtf8("color: black;\n"
-"font: bold 15px;"));
         startGameButtonShadow = new QLabel(centralwidget);
         startGameButtonShadow->setObjectName("startGameButtonShadow");
         startGameButtonShadow->setGeometry(QRect(345, 535, 141, 16));
@@ -223,7 +201,6 @@ public:
         endGameState->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
         startGameButtonShadow->raise();
-        patternLengthLabelShadow->raise();
         howToPlayShadow->raise();
         howToPlayTitleShadow->raise();
         scoreShadow->raise();
@@ -241,8 +218,6 @@ public:
         score->raise();
         howToPlayTitle->raise();
         howToPlay->raise();
-        patternLength->raise();
-        patternLengthLabel->raise();
         endGameState->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -277,8 +252,6 @@ public:
         howToPlayTitleShadow->setText(QCoreApplication::translate("MainWindow", "HOW TO PLAY", nullptr));
         howToPlay->setText(QCoreApplication::translate("MainWindow", "WATCH THE ORDER OF WHICH BUTTONS ARE PRESSED AND REPEAT IT", nullptr));
         howToPlayShadow->setText(QCoreApplication::translate("MainWindow", "WATCH THE ORDER OF WHICH BUTTONS ARE PRESSED AND REPEAT IT", nullptr));
-        patternLengthLabel->setText(QCoreApplication::translate("MainWindow", "PATTERN LENGTH:", nullptr));
-        patternLengthLabelShadow->setText(QCoreApplication::translate("MainWindow", "PATTERN LENGTH:", nullptr));
         startGameButtonShadow->setText(QCoreApplication::translate("MainWindow", "START GAME", nullptr));
         endGameState->setText(QString());
     } // retranslateUi

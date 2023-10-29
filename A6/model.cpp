@@ -4,8 +4,7 @@
 #include <QTimer>
 
 model::model(QObject *parent) : QObject(parent) {
-    gameStarted = false;
-    patternLength = 3;
+    patternLength = 100;
     currentPatternLength = 1;
     cpuIndex = 0;
     userIndex = 0;
@@ -13,18 +12,11 @@ model::model(QObject *parent) : QObject(parent) {
 }
 
 void model::startGame() {
-    gameStarted = true;
     emit updateGameStarted();
     createPattern();
 
     emit setCPUTurn();
     QTimer::singleShot(1000, this, &model::cpuTurn);
-}
-
-void model::patternLengthChanged(int length) {
-    patternLength = length;
-    QString patternLengthString = QString::number(length);
-    emit updateScore(patternLengthString);
 }
 
 void model::createPattern() {
@@ -44,6 +36,7 @@ void model::createPattern() {
 }
 
 void model::cpuTurn() {
+
     if (cpuIndex < currentPatternLength) {
 
         if (pattern[cpuIndex])
@@ -64,6 +57,8 @@ void model::cpuTurn() {
 void model::userTurn(int buttonPressed) {
     if (pattern[userIndex] != buttonPressed) {
         emit userLostGame();
+        emit setCPUTurn();
+        return;
     }
 
     if (userIndex < currentPatternLength - 1) {
@@ -72,14 +67,14 @@ void model::userTurn(int buttonPressed) {
     else {
         userIndex = 0;
 
-        if (currentPatternLength < patternLength - 1) {
+        if (currentPatternLength < patternLength) {
             currentPatternLength++;
+            emit setCPUTurn();
+            QTimer::singleShot(1000, this, &model::cpuTurn);
         } else {
             emit userWonGame();
+            emit setCPUTurn();
         }
-
-        emit setCPUTurn();
-        QTimer::singleShot(1000, this, &model::cpuTurn);
     }
 }
 
