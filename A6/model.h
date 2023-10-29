@@ -8,16 +8,33 @@ class model : public QObject
     Q_OBJECT
 public:
     explicit model(QObject *parent = nullptr);
+    ~model();
 
-//public slots:
-//    void something();
+    void createPattern();
+    void cpuTurn();
+    void userTurn(int);
 
-//signals:
-//    void somethingelse();
+public slots:
+    void startGame();
+    void patternLengthChanged(int patternLength);
 
-//private:
-//    int data;
+signals:
+    void updateScore(QString);
+    void updateGameStarted();
+    void pressRedButton();
+    void pressBlueButton();
+    void setCPUTurn();
+    void setUserTurn();
+    void userWonGame();
+    void userLostGame();
 
+private:
+    bool gameStarted;
+    int patternLength;
+    int cpuIndex;
+    int userIndex;
+    int currentPatternLength;
+    int* pattern;
 };
 
 #endif // MODEL_H

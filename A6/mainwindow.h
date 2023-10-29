@@ -17,10 +17,25 @@ public:
     ~MainWindow();
 
 public slots:
+
+    // button animations user
     void onRedButtonPressed();
     void onRedButtonReleased();
     void onBlueButtonPressed();
     void onBlueButtonReleased();
+    void onStartGamePressed();
+    void onStartGameReleased();
+
+    // button animation cpu
+    void pressRedButton();
+    void pressBlueButton();
+
+    // visual/interactive state changes
+    void onStartGame();
+    void onCpuTurn();
+    void onUserTurn();
+    void onUserWonGame();
+    void onUserLostGame();
 
 private:
     Ui::MainWindow *ui;

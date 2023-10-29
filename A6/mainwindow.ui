@@ -187,11 +187,11 @@ font: bold 10px;</string>
      <string>BY LANDON WEST</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="startGameButton">
     <property name="geometry">
      <rect>
-      <x>340</x>
-      <y>500</y>
+      <x>345</x>
+      <y>529</y>
       <width>121</width>
       <height>21</height>
      </rect>
@@ -212,438 +212,6 @@ border: 0px</string>
     <property name="text">
      <string>START GAME</string>
     </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>260</x>
-      <y>120</y>
-      <width>281</width>
-      <height>80</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="correctInputs">
-     <item>
-      <widget class="QRadioButton" name="indicator0">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator1">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator2">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator3">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator4">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator5">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator6">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator7">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator8">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="indicator9">
-       <property name="enabled">
-        <bool>false</bool>
-       </property>
-       <property name="font">
-        <font>
-         <bold>false</bold>
-        </font>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QRadioButton {
-    color:                  white;
-}
-
-QRadioButton::indicator {
-    width:                  10px;
-    height:                 10px;
-    border-radius:          7px;
-}
-
-QRadioButton::indicator:checked {
-    background-color:       red;
-    border:                 2px solid white;
-}
-
-QRadioButton::indicator:unchecked {
-    background-color:       transparent;
-    border:                 2px solid white;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="checked">
-        <bool>false</bool>
-       </property>
-       <property name="autoExclusive">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </widget>
    <widget class="QLabel" name="highScoreTitle">
     <property name="geometry">
@@ -815,6 +383,107 @@ font: bold 10px;</string>
      <bool>true</bool>
     </property>
    </widget>
+   <widget class="QSpinBox" name="patternLength">
+    <property name="geometry">
+     <rect>
+      <x>450</x>
+      <y>477</y>
+      <width>42</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="frame">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+    <property name="buttonSymbols">
+     <enum>QAbstractSpinBox::NoButtons</enum>
+    </property>
+    <property name="minimum">
+     <number>3</number>
+    </property>
+    <property name="maximum">
+     <number>15</number>
+    </property>
+   </widget>
+   <widget class="QLabel" name="patternLengthLabel">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>480</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+font: bold 15px;</string>
+    </property>
+    <property name="text">
+     <string>PATTERN LENGTH:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="patternLengthLabelShadow">
+    <property name="geometry">
+     <rect>
+      <x>300</x>
+      <y>483</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: black;
+font: bold 15px;</string>
+    </property>
+    <property name="text">
+     <string>PATTERN LENGTH:</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="startGameButtonShadow">
+    <property name="geometry">
+     <rect>
+      <x>345</x>
+      <y>535</y>
+      <width>141</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: black;
+font: bold 20px;</string>
+    </property>
+    <property name="text">
+     <string>START GAME</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="endGameState">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>335</x>
+      <y>170</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: white;
+font: bold 20px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <zorder>startGameButtonShadow</zorder>
+   <zorder>patternLengthLabelShadow</zorder>
    <zorder>howToPlayShadow</zorder>
    <zorder>howToPlayTitleShadow</zorder>
    <zorder>scoreShadow</zorder>
@@ -827,12 +496,14 @@ font: bold 10px;</string>
    <zorder>title</zorder>
    <zorder>titleShadow</zorder>
    <zorder>author</zorder>
-   <zorder>pushButton</zorder>
-   <zorder>horizontalLayoutWidget</zorder>
+   <zorder>startGameButton</zorder>
    <zorder>highScoreTitle</zorder>
    <zorder>score</zorder>
    <zorder>howToPlayTitle</zorder>
    <zorder>howToPlay</zorder>
+   <zorder>patternLength</zorder>
+   <zorder>patternLengthLabel</zorder>
+   <zorder>endGameState</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
