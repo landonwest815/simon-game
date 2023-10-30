@@ -8,16 +8,19 @@ model::model(QObject *parent) : QObject(parent) {
     pattern = nullptr; // will be created in createPattern();
     currentScore = 0;
     gameSpeed = 1000;
+    initialGameDelay = 750;
 }
 
 void model::startGame() {
+
     // let ui know the game has been started and generate pattern data
     emit updateGameStarted();
     createPattern();
 
     // start the first cpu turn
     emit setCPUTurn(currentScore);
-    QTimer::singleShot(750, this, &model::cpuTurn); // added small delay after start game was pressed
+    QTimer::singleShot(initialGameDelay, this, &model::cpuTurn); // added small delay after start game was pressed
+
 }
 
 void model::createPattern() {
@@ -34,15 +37,11 @@ void model::createPattern() {
     cpuIndex = 0;
     userIndex = 0;
 
-    // random number generation from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<int> dist1(0, 1); // Distribution in range [0, 1]
-
     // fill array with 1s and 0s randomly
     for (int i = 0; i < patternLength; i++) {
-        pattern[i] = dist1(rng); // Generate random 1 or 0
+        pattern[i] = generateRandomNumber(0, 1); // Generate random 1 or 0
     }
+
 }
 
 void model::cpuTurn() {
@@ -67,27 +66,21 @@ void model::cpuTurn() {
     else {
         cpuIndex = 0;
 
-        // make the cpu faster
+        // make the cpu faster; every 5 turns give a bigger speed boost
         if (currentPatternLength % 5 == 0)
-            gameSpeed -= 50;
+            gameSpeed -= 60;
         else
             gameSpeed -= 20;
 
-        // random number generation from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
-        std::random_device dev;
-        std::mt19937 rng(dev());
-        std::uniform_int_distribution<int> redX(50, 650);   // Distribution in range [50, 650]
-        std::uniform_int_distribution<int> blueX(50, 650);  // Distribution in range [50, 650]
-        std::uniform_int_distribution<int> Y(150, 400);     // Distribution in range [150, 400]
-
-        int redButtonX, blueButtonX;
-        int redButtonY = Y(rng);
-        int blueButtonY = Y(rng);
+        // move the buttons to random locations
+        int redButtonY = generateRandomNumber(150, 400);
+        int blueButtonY = generateRandomNumber(150, 400);
 
         // ensure that the new locations are spaced out from each other; no overlapping
+        int redButtonX, blueButtonX;
         do {
-            redButtonX = redX(rng);
-            blueButtonX = blueX(rng);
+            redButtonX = generateRandomNumber(50, 650);
+            blueButtonX = generateRandomNumber(50, 650);
         }
         while (abs((redButtonX) - (blueButtonX)) < 250
                  || abs((redButtonX) - (blueButtonX)) > 750);
@@ -99,6 +92,7 @@ void model::cpuTurn() {
         // switch turns
         emit setUserTurn();
     }
+
 }
 
 void model::userTurn(int buttonPressed) {
@@ -122,13 +116,24 @@ void model::userTurn(int buttonPressed) {
         if (currentPatternLength < patternLength) {
             currentPatternLength++; // increment current number of button presses
             emit setCPUTurn(currentScore);
-            QTimer::singleShot(1000, this, &model::cpuTurn);
+            QTimer::singleShot(initialGameDelay, this, &model::cpuTurn);
         } else {
             emit userWonGame();
             emit setCPUTurn(currentScore);
             return;
         }
     }
+
+}
+
+int model::generateRandomNumber(int min, int max) {
+
+    // code was used from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
+    std::random_device dev;
+    std::mt19937 rng(dev());
+    std::uniform_int_distribution<int> dist(min, max);
+    return dist(rng);
+
 }
 
 model::~model()
