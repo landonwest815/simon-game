@@ -17,27 +17,28 @@ public:
     ~MainWindow();
 
 public slots:
-
-    // button animations user
+    // button animations for user
     void onRedButtonPressed();
     void onRedButtonReleased();
+
     void onBlueButtonPressed();
     void onBlueButtonReleased();
+
     void onStartGamePressed();
     void onStartGameReleased();
 
-    // button animation cpu
+    // button animation for cpu (reuse user animations within cpp)
     void pressRedButton();
     void pressBlueButton();
 
-    // visual/interactive state changes
+    // state changes from model signals
     void onStartGame();
-    void onCpuTurn(int);
+    void onCpuTurn(int); //takes in the current score since this indicates a successful user turn
     void onUserTurn();
     void onUserWonGame();
     void onUserLostGame();
-    void onRedButtonMove(int, int);
-    void onBlueButtonMove(int, int);
+    void onRedButtonMove(int, int); // takes in x and y coordinates; moves elements accordingly
+    void onBlueButtonMove(int, int); // same as above
 
 private:
     Ui::MainWindow *ui;
