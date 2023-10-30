@@ -14,6 +14,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QProgressBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -44,6 +45,7 @@ public:
     QLabel *startGameButtonShadow;
     QLabel *endGameState;
     QLabel *endGameStateShadow;
+    QProgressBar *progressBar;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -208,6 +210,13 @@ public:
         endGameStateShadow->setStyleSheet(QString::fromUtf8("color: black;\n"
 "font: bold 20px;"));
         endGameStateShadow->setAlignment(Qt::AlignCenter);
+        progressBar = new QProgressBar(centralwidget);
+        progressBar->setObjectName("progressBar");
+        progressBar->setGeometry(QRect(340, 150, 118, 23));
+        progressBar->setStyleSheet(QString::fromUtf8(""));
+        progressBar->setValue(0);
+        progressBar->setTextVisible(false);
+        progressBar->setInvertedAppearance(false);
         MainWindow->setCentralWidget(centralwidget);
         redButtonBase->raise();
         redButton->raise();
@@ -229,6 +238,7 @@ public:
         howToPlayTitle->raise();
         howToPlay->raise();
         endGameState->raise();
+        progressBar->raise();
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
         menubar->setGeometry(QRect(0, 0, 800, 22));

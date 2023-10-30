@@ -96,6 +96,11 @@ MainWindow::MainWindow(model& model, QWidget *parent)
             &model::moveBlueButton,
             this,
             &MainWindow::onBlueButtonMove);
+
+    connect(&model,
+            &model::correctGuess,
+            ui->progressBar,
+            &QProgressBar::setValue);
 }
 
 void MainWindow::onRedButtonPressed() {
@@ -156,6 +161,10 @@ void MainWindow::onStartGame() {
 void MainWindow::onCpuTurn(int score) {
     ui->redButton->setEnabled(false);
     ui->blueButton->setEnabled(false);
+
+    QTimer::singleShot(750, this, [this](){
+        ui->progressBar->setValue(0);
+    });
 
     if (ui->score->text().toInt() < score) {
         ui->score->setText(QString::number(score));

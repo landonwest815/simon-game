@@ -104,6 +104,9 @@ void model::userTurn(int buttonPressed) {
         return;
     }
 
+    float progress = (userIndex + 1.0) / currentSequenceLength;
+    emit correctGuess(static_cast<int>(progress * 100));
+
     // increment the index until enough button presses have been read
     if (userIndex < currentSequenceLength - 1) {
         userIndex++;

@@ -116,6 +116,15 @@ signals:
     void setLostGame();
 
     /**
+     * @brief Signal emitted to indicate that the user has made a correct guess.
+     *
+     * This signal is emitted to notify the view that the user has made a correct guess and should update UI elements.
+     *
+     * @param The percentage of correct guesses made for the current turn.
+     */
+    void correctGuess(int);
+
+    /**
      * @brief Signal emitted to display a press of the red button.
      *
      * This signal is emitted to tell the view to display red button being pressed.
