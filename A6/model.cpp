@@ -4,22 +4,22 @@
 #include <QTimer>
 
 model::model(QObject *parent) : QObject(parent) {
-    patternLength = 10;
+    sequenceLength = 10;
     pattern = nullptr; // will be created in createPattern();
     currentScore = 0;
     gameSpeed = 1000;
-    initialGameDelay = 750;
+    cpuInitialDelay = 750;
 }
 
 void model::startGame() {
 
     // let ui know the game has been started and generate pattern data
-    emit updateGameStarted();
+    emit setGameStarted();
     createPattern();
 
     // start the first cpu turn
-    emit setCPUTurn(currentScore);
-    QTimer::singleShot(initialGameDelay, this, &model::cpuTurn); // added small delay after start game was pressed
+    emit setCpuTurn(currentScore);
+    QTimer::singleShot(cpuInitialDelay, this, &model::cpuTurn); // added small delay after start game was pressed
 
 }
 
@@ -30,15 +30,15 @@ void model::createPattern() {
         delete[] pattern;
 
     // initialize the pattern array
-    pattern = new int[patternLength];
+    pattern = new int[sequenceLength];
 
     // initialzie looping data
-    currentPatternLength = 1;
+    currentSequenceLength = 1;
     cpuIndex = 0;
     userIndex = 0;
 
     // fill array with 1s and 0s randomly
-    for (int i = 0; i < patternLength; i++) {
+    for (int i = 0; i < sequenceLength; i++) {
         pattern[i] = generateRandomNumber(0, 1); // Generate random 1 or 0
     }
 
@@ -47,7 +47,7 @@ void model::createPattern() {
 void model::cpuTurn() {
 
     // repeat this until the correct number of button presses has been met
-    if (cpuIndex < currentPatternLength) {
+    if (cpuIndex < currentSequenceLength) {
 
         // red button if 1; blue button if 0
         if (pattern[cpuIndex])
@@ -67,7 +67,7 @@ void model::cpuTurn() {
         cpuIndex = 0;
 
         // make the cpu faster; every 5 turns give a bigger speed boost
-        if (currentPatternLength % 5 == 0)
+        if (currentSequenceLength % 5 == 0)
             gameSpeed -= 60;
         else
             gameSpeed -= 20;
@@ -99,27 +99,27 @@ void model::userTurn(int buttonPressed) {
 
     // check for incorrect guess
     if (pattern[userIndex] != buttonPressed) {
-        emit userLostGame();
-        emit setCPUTurn(currentScore);
+        emit setLostGame();
+        emit setCpuTurn(currentScore);
         return;
     }
 
     // increment the index until enough button presses have been read
-    if (userIndex < currentPatternLength - 1) {
+    if (userIndex < currentSequenceLength - 1) {
         userIndex++;
     }
     else {
         userIndex = 0; // reset looping tracker for next turn
-        currentScore = currentPatternLength; // update the score
+        currentScore = currentSequenceLength; // update the score
 
         // if the player reaches the max pattern length, tell them they won
-        if (currentPatternLength < patternLength) {
-            currentPatternLength++; // increment current number of button presses
-            emit setCPUTurn(currentScore);
-            QTimer::singleShot(initialGameDelay, this, &model::cpuTurn);
+        if (currentSequenceLength < sequenceLength) {
+            currentSequenceLength++; // increment current number of button presses
+            emit setCpuTurn(currentScore);
+            QTimer::singleShot(cpuInitialDelay, this, &model::cpuTurn);
         } else {
-            emit userWonGame();
-            emit setCPUTurn(currentScore);
+            emit setWonGame();
+            emit setCpuTurn(currentScore);
             return;
         }
     }

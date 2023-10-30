@@ -43,7 +43,7 @@ MainWindow::MainWindow(model& model, QWidget *parent)
             &model,
             &model::startGame);
     connect(&model,
-            &model::updateGameStarted,
+            &model::setGameStarted,
             this,
             &MainWindow::onStartGame);
 
@@ -59,7 +59,7 @@ MainWindow::MainWindow(model& model, QWidget *parent)
 
     // turns
     connect(&model,
-            &model::setCPUTurn,
+            &model::setCpuTurn,
             this,
             &MainWindow::onCpuTurn);
     connect(&model,
@@ -79,11 +79,11 @@ MainWindow::MainWindow(model& model, QWidget *parent)
 
     // end game states
     connect(&model,
-            &model::userWonGame,
+            &model::setWonGame,
             this,
             &MainWindow::onUserWonGame);
     connect(&model,
-            &model::userLostGame,
+            &model::setLostGame,
             this,
             &MainWindow::onUserLostGame);
 
