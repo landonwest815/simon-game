@@ -86,6 +86,16 @@ MainWindow::MainWindow(model& model, QWidget *parent)
             &model::userLostGame,
             this,
             &MainWindow::onUserLostGame);
+
+    // move buttons
+    connect(&model,
+            &model::moveRedButton,
+            this,
+            &MainWindow::onRedButtonMove);
+    connect(&model,
+            &model::moveBlueButton,
+            this,
+            &MainWindow::onBlueButtonMove);
 }
 
 void MainWindow::onRedButtonPressed() {
@@ -134,11 +144,23 @@ void MainWindow::onStartGame() {
     ui->howToPlayShadow->setVisible(false);
     ui->howToPlayTitle->setVisible(false);
     ui->howToPlayTitleShadow->setVisible(false);
+
+    ui->endGameState->setText("");
+    ui->endGameStateShadow->setText("");
+
+    MainWindow::onRedButtonMove(250, 260);
+    MainWindow::onBlueButtonMove(450, 260);
+
 }
 
-void MainWindow::onCpuTurn() {
+void MainWindow::onCpuTurn(int score) {
     ui->redButton->setEnabled(false);
     ui->blueButton->setEnabled(false);
+
+    if (ui->score->text().toInt() < score) {
+        ui->score->setText(QString::number(score));
+        ui->scoreShadow->setText(QString::number(score));
+    }
 }
 
 void MainWindow::onUserTurn() {
@@ -148,10 +170,40 @@ void MainWindow::onUserTurn() {
 
 void MainWindow::onUserWonGame() {
     ui->endGameState->setText("USER WON");
+    ui->endGameState->setStyleSheet("color: yellow; font: bold 20px;");
+    ui->endGameStateShadow->setText("USER WON");
+
+    ui->startGameButton->setVisible(true);
+    ui->startGameButtonShadow->setVisible(true);
+
+    ui->howToPlay->setVisible(true);
+    ui->howToPlayShadow->setVisible(true);
+    ui->howToPlayTitle->setVisible(true);
+    ui->howToPlayTitleShadow->setVisible(true);
 }
 
 void MainWindow::onUserLostGame() {
     ui->endGameState->setText("USER LOST");
+    ui->endGameState->setStyleSheet("color: red; font: bold 20px;");
+    ui->endGameStateShadow->setText("USER LOST");
+
+    ui->startGameButton->setVisible(true);
+    ui->startGameButtonShadow->setVisible(true);
+
+    ui->howToPlay->setVisible(true);
+    ui->howToPlayShadow->setVisible(true);
+    ui->howToPlayTitle->setVisible(true);
+    ui->howToPlayTitleShadow->setVisible(true);
+}
+
+void MainWindow::onRedButtonMove(int x, int y) {
+    ui->redButton->move(x, y);
+    ui->redButtonBase->move(x, y + 15);
+}
+
+void MainWindow::onBlueButtonMove(int x, int y) {
+    ui->blueButton->move(x, y);
+    ui->blueButtonBase->move(x, y + 15);
 }
 
 MainWindow::~MainWindow()

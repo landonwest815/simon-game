@@ -21,11 +21,13 @@ signals:
     void updateGameStarted();
     void pressRedButton();
     void pressBlueButton();
-    void setCPUTurn();
+    void setCPUTurn(int);
     void setUserTurn();
     void userWonGame();
     void userLostGame();
     void invertButtons();
+    void moveRedButton(int, int);
+    void moveBlueButton(int, int);
 
 private:
     int patternLength;

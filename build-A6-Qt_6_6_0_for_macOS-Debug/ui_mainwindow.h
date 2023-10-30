@@ -43,6 +43,7 @@ public:
     QLabel *howToPlayShadow;
     QLabel *startGameButtonShadow;
     QLabel *endGameState;
+    QLabel *endGameStateShadow;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -53,6 +54,7 @@ public:
         MainWindow->resize(800, 600);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName("centralwidget");
+        centralwidget->setStyleSheet(QString::fromUtf8(""));
         redButton = new QPushButton(centralwidget);
         redButton->setObjectName("redButton");
         redButton->setGeometry(QRect(250, 260, 110, 110));
@@ -195,21 +197,29 @@ public:
         endGameState = new QLabel(centralwidget);
         endGameState->setObjectName("endGameState");
         endGameState->setEnabled(true);
-        endGameState->setGeometry(QRect(335, 170, 131, 20));
+        endGameState->setGeometry(QRect(340, 300, 131, 20));
         endGameState->setStyleSheet(QString::fromUtf8("color: white;\n"
 "font: bold 20px;"));
         endGameState->setAlignment(Qt::AlignCenter);
+        endGameStateShadow = new QLabel(centralwidget);
+        endGameStateShadow->setObjectName("endGameStateShadow");
+        endGameStateShadow->setEnabled(true);
+        endGameStateShadow->setGeometry(QRect(340, 304, 131, 20));
+        endGameStateShadow->setStyleSheet(QString::fromUtf8("color: black;\n"
+"font: bold 20px;"));
+        endGameStateShadow->setAlignment(Qt::AlignCenter);
         MainWindow->setCentralWidget(centralwidget);
+        redButtonBase->raise();
+        redButton->raise();
+        blueButtonBase->raise();
+        blueButton->raise();
+        endGameStateShadow->raise();
         startGameButtonShadow->raise();
         howToPlayShadow->raise();
         howToPlayTitleShadow->raise();
         scoreShadow->raise();
         highScoreTitleShadow->raise();
         authorShadow->raise();
-        blueButtonBase->raise();
-        redButtonBase->raise();
-        redButton->raise();
-        blueButton->raise();
         title->raise();
         titleShadow->raise();
         author->raise();
@@ -246,14 +256,15 @@ public:
         startGameButton->setText(QCoreApplication::translate("MainWindow", "START GAME", nullptr));
         highScoreTitle->setText(QCoreApplication::translate("MainWindow", "HIGH SCORE", nullptr));
         highScoreTitleShadow->setText(QCoreApplication::translate("MainWindow", "HIGH SCORE", nullptr));
-        score->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
-        scoreShadow->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
+        score->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
+        scoreShadow->setText(QCoreApplication::translate("MainWindow", "0", nullptr));
         howToPlayTitle->setText(QCoreApplication::translate("MainWindow", "HOW TO PLAY", nullptr));
         howToPlayTitleShadow->setText(QCoreApplication::translate("MainWindow", "HOW TO PLAY", nullptr));
         howToPlay->setText(QCoreApplication::translate("MainWindow", "WATCH THE ORDER OF WHICH BUTTONS ARE PRESSED AND REPEAT IT", nullptr));
         howToPlayShadow->setText(QCoreApplication::translate("MainWindow", "WATCH THE ORDER OF WHICH BUTTONS ARE PRESSED AND REPEAT IT", nullptr));
         startGameButtonShadow->setText(QCoreApplication::translate("MainWindow", "START GAME", nullptr));
         endGameState->setText(QString());
+        endGameStateShadow->setText(QString());
     } // retranslateUi
 
 };

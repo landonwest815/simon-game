@@ -14,6 +14,9 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QPushButton" name="redButton">
     <property name="geometry">
      <rect>
@@ -261,7 +264,7 @@ font: bold 20px;</string>
 font: bold 15px;</string>
     </property>
     <property name="text">
-     <string>7</string>
+     <string>0</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -281,7 +284,7 @@ font: bold 15px;</string>
 font: bold 15px;</string>
     </property>
     <property name="text">
-     <string>7</string>
+     <string>0</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
@@ -406,8 +409,8 @@ font: bold 20px;</string>
     </property>
     <property name="geometry">
      <rect>
-      <x>335</x>
-      <y>170</y>
+      <x>340</x>
+      <y>300</y>
       <width>131</width>
       <height>20</height>
      </rect>
@@ -423,16 +426,40 @@ font: bold 20px;</string>
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="endGameStateShadow">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>340</x>
+      <y>304</y>
+      <width>131</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">color: black;
+font: bold 20px;</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <zorder>redButtonBase</zorder>
+   <zorder>redButton</zorder>
+   <zorder>blueButtonBase</zorder>
+   <zorder>blueButton</zorder>
+   <zorder>endGameStateShadow</zorder>
    <zorder>startGameButtonShadow</zorder>
    <zorder>howToPlayShadow</zorder>
    <zorder>howToPlayTitleShadow</zorder>
    <zorder>scoreShadow</zorder>
    <zorder>highScoreTitleShadow</zorder>
    <zorder>authorShadow</zorder>
-   <zorder>blueButtonBase</zorder>
-   <zorder>redButtonBase</zorder>
-   <zorder>redButton</zorder>
-   <zorder>blueButton</zorder>
    <zorder>title</zorder>
    <zorder>titleShadow</zorder>
    <zorder>author</zorder>

@@ -32,10 +32,12 @@ public slots:
 
     // visual/interactive state changes
     void onStartGame();
-    void onCpuTurn();
+    void onCpuTurn(int);
     void onUserTurn();
     void onUserWonGame();
     void onUserLostGame();
+    void onRedButtonMove(int, int);
+    void onBlueButtonMove(int, int);
 
 private:
     Ui::MainWindow *ui;

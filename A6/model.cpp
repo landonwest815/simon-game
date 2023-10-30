@@ -5,9 +5,6 @@
 
 model::model(QObject *parent) : QObject(parent) {
     patternLength = 100;
-    currentPatternLength = 1;
-    cpuIndex = 0;
-    userIndex = 0;
     pattern = nullptr;
 }
 
@@ -15,7 +12,7 @@ void model::startGame() {
     emit updateGameStarted();
     createPattern();
 
-    emit setCPUTurn();
+    emit setCPUTurn(currentPatternLength - 1);
     QTimer::singleShot(1000, this, &model::cpuTurn);
 }
 
@@ -24,6 +21,10 @@ void model::createPattern() {
         delete[] pattern;
 
     pattern = new int[patternLength];
+
+    currentPatternLength = 1;
+    cpuIndex = 0;
+    userIndex = 0;
 
     // random number generation from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
     std::random_device dev;
@@ -50,6 +51,29 @@ void model::cpuTurn() {
     }
     else {
         cpuIndex = 0;
+
+        // random number generation from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
+        std::random_device dev;
+        std::mt19937 rng(dev());
+        std::uniform_int_distribution<int> redX(50, 650);
+        std::uniform_int_distribution<int> blueX(50, 650);
+        std::uniform_int_distribution<int> Y(150, 400);
+
+        int redButtonX, blueButtonX;
+        int redButtonY = Y(rng);
+        int blueButtonY = Y(rng);
+
+        // ensure that the new locations are spaced out from each other; not overlapping
+        do {
+            redButtonX = redX(rng);
+            blueButtonX = blueX(rng);
+        }
+        while (abs((redButtonX + 50) - (blueButtonX - 50)) < 250
+                 && abs((redButtonX + 50) - (blueButtonX - 50)) > 1000);
+
+        emit moveRedButton(redButtonX, redButtonY);
+        emit moveBlueButton(blueButtonX, blueButtonY);
+
         emit setUserTurn();
     }
 }
@@ -57,7 +81,7 @@ void model::cpuTurn() {
 void model::userTurn(int buttonPressed) {
     if (pattern[userIndex] != buttonPressed) {
         emit userLostGame();
-        emit setCPUTurn();
+        emit setCPUTurn(currentPatternLength - 1);
         return;
     }
 
@@ -69,11 +93,11 @@ void model::userTurn(int buttonPressed) {
 
         if (currentPatternLength < patternLength) {
             currentPatternLength++;
-            emit setCPUTurn();
+            emit setCPUTurn(currentPatternLength - 1);
             QTimer::singleShot(1000, this, &model::cpuTurn);
         } else {
             emit userWonGame();
-            emit setCPUTurn();
+            emit setCPUTurn(currentPatternLength - 1);
         }
     }
 }
