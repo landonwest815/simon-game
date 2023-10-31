@@ -3,24 +3,38 @@
 
 #include <QObject>
 
+/**
+ * @brief The core game logic and data model.
+ *
+ * The `model` class represents the core game logic and data model for the game application.
+ * It manages game states, sequences, and interactions with the user interface (UI).
+ */
 class model : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief Constructs the game model.
+     *
+     * @param parent - The parent QObject.
+     */
     explicit model(QObject *parent = nullptr);
+    /**
+     * @brief Destructor for the game model.
+     */
     ~model();
 
     /**
-     * @brief Create's a pattern sequence for the current game.
+     * @brief Create's a sequence for the current game.
      *
      * This function is called within the class upon game start.
-     * An array of size "patternLength" (private data) is created and filled with 1s and 0s randomly.
+     * An array of size "sequenceLength" (private data) is created and filled with 1s and 0s randomly.
      * Upon an additional game start, the array will be deleted and recreated with a unique sequence.
      *
      * This function simply modifies existing data and sends signals to the view.
      * No parameters or return data.
      */
-    void createPattern();
+    void createSequence();
 
     /**
      * @brief Handle's the cpu's turn in the game.
@@ -50,9 +64,8 @@ public:
     /**
      * @brief Generate a random integer number within the given bounds.
      *
-     * This function generates a random integer within the specified range [min, max].
-     * I have set these bounds in a way that doesn't allow for the buttons to be too close to the edge
-     * of the screen or on top of other UI elements.
+     * This function generates a random integer within the specified range [min, max]. The bounds are set to prevent buttons
+     * from being too close to the screen's edge or overlapping with other UI elements.
      * Within this function is a do while loop that will attempt to generate coordinates until the buttons new position values
      * are far enough away from each other. This fixes any issue of buttons being on top of each other.
      *
@@ -164,9 +177,9 @@ private:
     int cpuIndex;            // Keeps track of CPU's progress in the current turn.
     int userIndex;           // Keeps track of the User's progress in the current turn.
     int sequenceLength;       // The total length of the game sequence (default: 100).
-    int currentSequenceLength; // The current length of the pattern to follow in the game.
+    int currentSequenceLength; // The current length of the sequence to follow in the game.
     int currentScore;        // The current score (number of successful user turns).
-    int* pattern;            // An array consisting of the currrent game sequence (1s or 0s randomly generated).
+    int* sequence;            // An array consisting of the currrent game sequence (1s or 0s randomly generated).
     int gameSpeed;           // Controls the speed at which the CPU presses buttons.
     int cpuInitialDelay;    // The delay between the user pressing "Start Game" and the CPU's initial action.
 };

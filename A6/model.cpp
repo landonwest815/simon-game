@@ -4,53 +4,51 @@
 #include <QTimer>
 
 model::model(QObject *parent) : QObject(parent) {
-    sequenceLength = 10;
-    pattern = nullptr; // will be created in createPattern();
+    sequenceLength = 100;
+    sequence = nullptr; // will be created in createSequence();
     currentScore = 0;
     gameSpeed = 1000;
     cpuInitialDelay = 750;
 }
 
-void model::startGame() {
 
-    // let ui know the game has been started and generate pattern data
+// SLOTS
+
+void model::startGame() {
+    // let UI know the game has been started and generate sequence data
     emit setGameStarted();
-    createPattern();
+    createSequence();
 
     // start the first cpu turn
     emit setCpuTurn(currentScore);
     QTimer::singleShot(cpuInitialDelay, this, &model::cpuTurn); // added small delay after start game was pressed
-
 }
 
-void model::createPattern() {
-
+void model::createSequence() {
     // check for previous game data
-    if (pattern != nullptr)
-        delete[] pattern;
+    if (sequence != nullptr)
+        delete[] sequence;
 
-    // initialize the pattern array
-    pattern = new int[sequenceLength];
+    // initialize the sequence array
+    sequence = new int[sequenceLength];
 
-    // initialzie looping data
+    // set the looping data
     currentSequenceLength = 1;
     cpuIndex = 0;
     userIndex = 0;
 
     // fill array with 1s and 0s randomly
     for (int i = 0; i < sequenceLength; i++) {
-        pattern[i] = generateRandomNumber(0, 1); // Generate random 1 or 0
+        sequence[i] = generateRandomNumber(0, 1); // Generate random 1 or 0
     }
-
 }
 
 void model::cpuTurn() {
-
     // repeat this until the correct number of button presses has been met
     if (cpuIndex < currentSequenceLength) {
 
         // red button if 1; blue button if 0
-        if (pattern[cpuIndex])
+        if (sequence[cpuIndex])
             emit pressRedButton();
         else
             emit pressBlueButton();
@@ -62,7 +60,7 @@ void model::cpuTurn() {
         QTimer::singleShot(gameSpeed, this, &model::cpuTurn);
     }
 
-    // reset the index, move the buttons to random locations, and switch the users turn
+    // reset the index, move the buttons to random locations, and switch to the user
     else {
         cpuIndex = 0;
 
@@ -73,13 +71,13 @@ void model::cpuTurn() {
             gameSpeed -= 20;
 
         // move the buttons to random locations
-        int redButtonY = generateRandomNumber(150, 400);
-        int blueButtonY = generateRandomNumber(150, 400);
+        int redButtonY = generateRandomNumber(200, 400);    // these values were decided by me based on UI bounds
+        int blueButtonY = generateRandomNumber(200, 400);
 
         // ensure that the new locations are spaced out from each other; no overlapping
         int redButtonX, blueButtonX;
         do {
-            redButtonX = generateRandomNumber(50, 650);
+            redButtonX = generateRandomNumber(50, 650);     // these values were decided by me based on UI bounds
             blueButtonX = generateRandomNumber(50, 650);
         }
         while (abs((redButtonX) - (blueButtonX)) < 250
@@ -92,18 +90,16 @@ void model::cpuTurn() {
         // switch turns
         emit setUserTurn();
     }
-
 }
 
 void model::userTurn(int buttonPressed) {
-
     // check for incorrect guess
-    if (pattern[userIndex] != buttonPressed) {
+    if (sequence[userIndex] != buttonPressed) {
         emit setLostGame();
-        emit setCpuTurn(currentScore);
         return;
     }
 
+    // calculate the current progress as a percentage
     float progress = (userIndex + 1.0) / currentSequenceLength;
     emit correctGuess(static_cast<int>(progress * 100));
 
@@ -115,31 +111,29 @@ void model::userTurn(int buttonPressed) {
         userIndex = 0; // reset looping tracker for next turn
         currentScore = currentSequenceLength; // update the score
 
-        // if the player reaches the max pattern length, tell them they won
+        // if the player reaches the max sequence length, tell them they won
         if (currentSequenceLength < sequenceLength) {
             currentSequenceLength++; // increment current number of button presses
             emit setCpuTurn(currentScore);
             QTimer::singleShot(cpuInitialDelay, this, &model::cpuTurn);
         } else {
             emit setWonGame();
-            emit setCpuTurn(currentScore);
-            return;
         }
     }
-
 }
 
-int model::generateRandomNumber(int min, int max) {
 
+// HELPERS
+
+int model::generateRandomNumber(int min, int max) {
     // code was used from https://stackoverflow.com/questions/13445688/how-to-generate-a-random-number-in-c
     std::random_device dev;
     std::mt19937 rng(dev());
     std::uniform_int_distribution<int> dist(min, max);
     return dist(rng);
-
 }
 
 model::~model()
 {
-    delete[] pattern;
+    delete[] sequence;
 }

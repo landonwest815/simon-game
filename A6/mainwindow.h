@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "QtWidgets/qpushbutton.h"
 #include "model.h"
 
 QT_BEGIN_NAMESPACE
@@ -31,6 +32,16 @@ public:
      * @brief Destructor for the main UI window.
      */
     ~MainWindow();
+
+    /**
+     * @brief Handles the end of the game (regardless of win or loss).
+     *
+     * This sets up UI elements for a new game to be started.
+     */
+    void onEndOfGame();
+
+    void animateButtonPress(QPushButton*);
+    void animateButtonRelease(QPushButton*);
 
 public slots:
 
@@ -86,14 +97,14 @@ public slots:
      *
      * This slot is activated from a model signal. This slot simply calls the same slots the User button animation uses above.
      */
-    void pressRedButton();
+    void onCpuRedButton();
 
     /**
      * @brief Display a press of the blue button in response to CPU actions.
      *
      * This slot is activated from a model signal. This slot simply calls the same slots the User button animation uses above.
      */
-    void pressBlueButton();
+    void onCpuBlueButton();
 
 
     // STATES
@@ -139,9 +150,25 @@ public slots:
      */
     void onUserLostGame();
 
+    /**
+     * @brief Moves red button (and its base) to the passed in coordinates.
+     *
+     * This is a simple operation done by the buttons move function.
+     *
+     * @param x - the x coordinate
+     * @param y - the y coordinate
+     */
+    void onRedButtonMove(int, int);
 
-    void onRedButtonMove(int, int); // takes in x and y coordinates; moves elements accordingly
-    void onBlueButtonMove(int, int); // same as above
+    /**
+     * @brief Moves blue button (and its base) to the passed in coordinates.
+     *
+     * This is a simple operation done by the buttons move function.
+     *
+     * @param x - the x coordinate
+     * @param y - the y coordinate
+     */
+    void onBlueButtonMove(int, int);
 
 private:
     Ui::MainWindow *ui;

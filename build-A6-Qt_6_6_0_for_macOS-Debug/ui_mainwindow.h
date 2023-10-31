@@ -59,6 +59,7 @@ public:
         centralwidget->setStyleSheet(QString::fromUtf8(""));
         redButton = new QPushButton(centralwidget);
         redButton->setObjectName("redButton");
+        redButton->setEnabled(false);
         redButton->setGeometry(QRect(250, 260, 110, 110));
         redButton->setCursor(QCursor(Qt::PointingHandCursor));
         redButton->setStyleSheet(QString::fromUtf8("background-color: red;\n"
@@ -72,6 +73,7 @@ public:
 " min-height:100px;"));
         blueButton = new QPushButton(centralwidget);
         blueButton->setObjectName("blueButton");
+        blueButton->setEnabled(false);
         blueButton->setGeometry(QRect(450, 260, 110, 110));
         blueButton->setCursor(QCursor(Qt::PointingHandCursor));
         blueButton->setStyleSheet(QString::fromUtf8("background-color: blue;\n"
